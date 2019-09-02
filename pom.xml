@@ -83,4 +83,12 @@
     </dependency>
   </dependencies>
 
+  <distributionManagement>
+    <repository>
+      <id>nexus-releases</id>
+      <name>YunHong NEXUS Repository</name>
+      <url>http://nexus.ajidou.com/repository/maven-releases/</url>
+    </repository>
+  </distributionManagement>
+
 </project>
