@@ -3,6 +3,7 @@ package wxTools.config;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import wxTools.model.BaseOpenApi;
 import wxTools.model.ResultUtil;
 import wxTools.tools.FormatUtil;
@@ -32,7 +33,11 @@ public class WxToolsApi {
         JSONObject jsonObject = JSONObject.parseObject(json);
         String date = FormatUtil.formatDataTime(new Date());
         Map<String,String> paramater = new HashMap<>();
-        paramater.put("store_code",storeCode);
+        if (!StringUtils.isEmpty(storeCode)){
+            paramater.put("store_code",storeCode);
+        }else {
+            paramater.put("store_code",baseOpenApi.getStoreCode());
+        }
         paramater.put("model",model);
         paramater.put("method",method);
         paramater.put("app_id", baseOpenApi.getNewAppId());
@@ -60,7 +65,11 @@ public class WxToolsApi {
         JSONObject jsonObject = JSONObject.parseObject(json);
         String date = FormatUtil.formatDataTime(new Date());
         Map<String,String> paramater = new HashMap<>();
-        paramater.put("storeCode",storeCode);
+        if (!StringUtils.isEmpty(storeCode)){
+            paramater.put("store_code",storeCode);
+        }else {
+            paramater.put("store_code",baseOpenApi.getStoreCode());
+        }
         paramater.put("model",model);
         paramater.put("method",method);
         paramater.put("appid", baseOpenApi.getOldAppId());
