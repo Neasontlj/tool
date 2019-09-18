@@ -27,12 +27,12 @@ public class WxToolsApi {
      * @return 返回json文件
      *
      */
-    public static ResultUtil getCRMNewOpenApi(BaseOpenApi baseOpenApi, String model, String method, String json,String path){
+    public static ResultUtil getCRMNewOpenApi(BaseOpenApi baseOpenApi,String storeCode, String model, String method, String json,String path){
         baseOpenApi=ParamsConfig.getWxParams(path);
         JSONObject jsonObject = JSONObject.parseObject(json);
         String date = FormatUtil.formatDataTime(new Date());
         Map<String,String> paramater = new HashMap<>();
-        paramater.put("store_code",baseOpenApi.getStoreCode());
+        paramater.put("store_code",storeCode);
         paramater.put("model",model);
         paramater.put("method",method);
         paramater.put("app_id", baseOpenApi.getNewAppId());
@@ -55,12 +55,12 @@ public class WxToolsApi {
      * @param json
      * @return
      */
-    public static ResultUtil getCRMOldOpenApi(BaseOpenApi baseOpenApi,String model,String method,String json,String path){
+    public static ResultUtil getCRMOldOpenApi(BaseOpenApi baseOpenApi,String storeCode,String model,String method,String json,String path){
         baseOpenApi=ParamsConfig.getWxParams(path);
         JSONObject jsonObject = JSONObject.parseObject(json);
         String date = FormatUtil.formatDataTime(new Date());
         Map<String,String> paramater = new HashMap<>();
-        paramater.put("storeCode",baseOpenApi.getStoreCode());
+        paramater.put("storeCode",storeCode);
         paramater.put("model",model);
         paramater.put("method",method);
         paramater.put("appid", baseOpenApi.getOldAppId());
