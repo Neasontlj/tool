@@ -5,6 +5,7 @@ package wxTools.tools;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -55,6 +56,10 @@ public class HttpClientUtils {
      */
     public static String get(String url, String charset) {
         HttpGet httpGet = new HttpGet(url);
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
+                .setSocketTimeout(5000).build();
+        httpGet.setConfig(requestConfig);
         return executeRequest(httpGet, charset);
     }
 
@@ -75,6 +80,10 @@ public class HttpClientUtils {
     public static String ajaxGet(String url, String charset) {
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("X-Requested-With", "XMLHttpRequest");
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
+                .setSocketTimeout(5000).build();
+        httpGet.setConfig(requestConfig);
         return executeRequest(httpGet, charset);
     }
 
@@ -90,6 +99,10 @@ public class HttpClientUtils {
      */
     public static String post(String url, Map<String, String> dataMap, String charset) {
         HttpPost httpPost = new HttpPost(url);
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
+                .setSocketTimeout(5000).build();
+        httpPost.setConfig(requestConfig);
         try {
             if (dataMap != null) {
                 List<NameValuePair> nvps = new ArrayList<NameValuePair>();
@@ -148,6 +161,10 @@ public class HttpClientUtils {
     public static String ajaxPostJson(String url, String jsonString, String charset) {
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader("X-Requested-With", "XMLHttpRequest");
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
+                .setSocketTimeout(5000).build();
+        httpPost.setConfig(requestConfig);
 //		try {
         StringEntity stringEntity = new StringEntity(jsonString, charset);// 解决中文乱码问题
         stringEntity.setContentEncoding(charset);
@@ -164,7 +181,10 @@ public class HttpClientUtils {
         String charset = "UTF-8";
         HttpPost httpPost = new HttpPost(url);
         //httpPost.setHeader("X-Requested-With", "XMLHttpRequest");
-
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
+                .setSocketTimeout(5000).build();
+        httpPost.setConfig(requestConfig);
         if (dataMap != null) {
           for (Map.Entry<String, String> entry : dataMap.entrySet()) {
                 httpPost.setHeader(entry.getKey(), entry.getValue());
@@ -186,6 +206,10 @@ public class HttpClientUtils {
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
         httpPost.setHeader("Authorization", authorization);
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
+                .setSocketTimeout(5000).build();
+        httpPost.setConfig(requestConfig);
         if (dataMap != null) {
             List<NameValuePair> nvps = new ArrayList<NameValuePair>();
             for (Map.Entry<String, String> entry : dataMap.entrySet()) {
